@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Field from './components/field';
+import Languages from './components/languages';
 import './App.css';
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
   return (
     <div>
       <Field label="Enter English" onChange={setText} value={text} />
+      <Languages language={language} onLanguageChange={setLanguage} />
     </div>
   )
 }
