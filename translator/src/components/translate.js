@@ -17,3 +17,30 @@ const doTranslation = async (input, languageCode, cancelToken) => {
     return "";
   }
 };
+
+export default ({ language, text }) => {
+  const [translated, setTranslated] = useState("");
+
+  useEffect(() => {
+    if (!text) {
+      return;
+    }
+
+    const cancelToken = axios.CancelToken.source();
+
+    doTranslation(text, language, cancelToken).then(setTranslated);
+
+    return () => {
+      try {
+        cancelToken.cancel();
+      } catch (err) {}
+    };
+  }, [text, language]);
+
+  return (
+    <div>
+      <label className="label">Output</label>
+      <h1 className="title">{translated}</h1>
+    </div>
+  );
+};
